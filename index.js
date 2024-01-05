@@ -4,14 +4,14 @@ const wheel = document.getElementById("wheel"),
 
 // Values of min and max angle for a value
 
-const rotationValues = [
-  { minDegree: 0, maxDegree: 30, value: 2 },
-  { minDegree: 31, maxDegree: 90, value: 1 },
-  { minDegree: 91, maxDegree: 150, value: 6 },
-  { minDegree: 151, maxDegree: 210, value: 5 },
-  { minDegree: 211, maxDegree: 270, value: 4 },
-  { minDegree: 271, maxDegree: 330, value: 3 },
-  { minDegree: 331, maxDegree: 360, value: 2 },
+let rotationValues = [
+  { minDegree: 0, maxDegree: 30, value: 0 },
+  { minDegree: 31, maxDegree: 90, value: 0 },
+  { minDegree: 91, maxDegree: 150, value: 0 },
+  { minDegree: 151, maxDegree: 210, value: 0 },
+  { minDegree: 211, maxDegree: 270, value: 0 },
+  { minDegree: 271, maxDegree: 330, value: 0 },
+  { minDegree: 331, maxDegree: 360, value: 0 },
 ];
 
 // Size of pieces
@@ -32,15 +32,26 @@ var pieColors = [
 let myChart = null;
 
 const setMyChart = () => {
+  const labels = [];
+  let l = 0;
+  for (const i in miniApp.rewardList) {
+    labels.push(
+      (miniApp.rewardList[i].value ? miniApp.rewardList[i].value : "") +
+        " " +
+        miniApp.rewardList[i].name
+    );
+    labels.push("");
+    rotationValues[l + 1].value = miniApp.rewardList[i].id;
+    l += 2;
+  }
+
   myChart = new Chart(wheel, {
     // Display text on pie chart
     plugins: [ChartDataLabels],
     type: "pie",
     data: {
       // Values on chart
-      labels: miniApp.rewardList.map(
-        (i) => (i?.value ? i?.value : "") + " " + i?.name
-      ),
+      labels: labels,
       datasets: [
         {
           backgroundColor: pieColors,
@@ -81,7 +92,7 @@ const valueGenerator = (angleValue) => {
         findReward?.name ? "" + findReward?.name : "Value"
       }: ${i.value}</p>`;
 
-      spinBtn.disabled = true;
+      // spinBtn.disabled = true;
       if (findReward) {
         miniApp.earnReward(findReward);
       } else {

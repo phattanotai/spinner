@@ -16,7 +16,8 @@ class KlaiklaiMiniApp {
     data: {},
   };
   rewardList = [];
-  appName;
+  appName = "";
+  startApp = () => {};
 
   constructor(appName) {
     this.appName = appName;
@@ -41,27 +42,16 @@ class KlaiklaiMiniApp {
           name: "Coin",
           value: 10,
         },
-        {
-          id: 2,
-          name: "",
-        },
+
         {
           id: 3,
           name: "Coin",
           value: 10,
         },
         {
-          id: 4,
-          name: "",
-        },
-        {
           id: 5,
           name: "Coin",
           value: 10,
-        },
-        {
-          id: 6,
-          name: "",
         },
       ];
     } else {
@@ -73,6 +63,10 @@ class KlaiklaiMiniApp {
       };
       window.ReactNativeWebView.postMessage(JSON.stringify(this.payload));
     }
+  }
+
+  setStartApp(startApp) {
+    this.startApp = startApp;
   }
 
   setAppToken(token) {
@@ -109,5 +103,9 @@ class KlaiklaiMiniApp {
 
   setRewardList(rewardList) {
     this.rewardList = rewardList;
+  }
+
+  startApp() {
+    this.startApp();
   }
 }
