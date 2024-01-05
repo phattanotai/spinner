@@ -32,18 +32,22 @@ var pieColors = [
 let myChart = null;
 
 const setMyChart = () => {
-  const labels = [];
+  let labels = [];
   let l = 0;
-  for (const i in miniApp.rewardList) {
-    labels.push(
-      (miniApp.rewardList[i].value ? miniApp.rewardList[i].value : "") +
-        " " +
-        miniApp.rewardList[i].name
-    );
+  for (const i of miniApp.rewardList) {
+    labels.push((i.value ? i.value : "") + " " + i.name);
     labels.push("");
-    rotationValues[l + 1].value = miniApp.rewardList[i].id;
+    rotationValues[l + 1].value = i.id;
     l += 2;
   }
+
+  const list = [];
+  for (let i = labels.length; i > 0; i--) {
+    list.push(labels[i - 1]);
+  }
+
+  list.unshift(labels[0]);
+  labels = list;
 
   myChart = new Chart(wheel, {
     // Display text on pie chart
@@ -73,7 +77,7 @@ const setMyChart = () => {
           color: "#ffffff",
           formatter: (_, context) =>
             context.chart.data.labels[context.dataIndex],
-          font: { size: 24 },
+          font: { size: 16 },
         },
       },
     },
@@ -102,8 +106,6 @@ const valueGenerator = (angleValue) => {
       }, 100);
       // spinBtn.disabled = true;
 
-      console.log(i.value, findReward, miniApp.rewardList);
-
       break;
     }
   }
@@ -117,13 +119,14 @@ let resultValue = 101;
 // Start spinning
 spinBtn.addEventListener("click", () => {
   spinBtn.disabled = true;
-  finalValue.innerHTML = `<p>Good Luck!</p>`;
+  finalValue.innerHTML = `<p>ขอให้คุณโชคดี!</p>`;
   // Generate random degree to stop at
   let randomDegree = Math.floor(Math.random() * (355 - 0 + 1) + 0);
   // Interval for rotation animation
   let rotationInterval = window.setInterval(() => {
     myChart.options.rotation = myChart.options.rotation + resultValue;
     myChart.update();
+
     // if rotation > 360 reset it back to 0
     if (myChart.options.rotation >= 360) {
       count += 1;

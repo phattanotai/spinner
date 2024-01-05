@@ -40,13 +40,13 @@ class KlaiklaiMiniApp {
         {
           id: 1,
           name: "Coin",
-          value: 10,
+          value: 5,
         },
 
         {
           id: 3,
           name: "Coin",
-          value: 10,
+          value: 20,
         },
         {
           id: 5,
