@@ -92,12 +92,15 @@ const valueGenerator = (angleValue) => {
         findReward?.name ? "" + findReward?.name : "Value"
       }: ${i.value}</p>`;
 
+      setTimeout(() => {
+        if (findReward) {
+          miniApp.earnReward(findReward);
+        } else {
+          miniApp.closeApp();
+        }
+      }, 100);
       // spinBtn.disabled = true;
-      if (findReward) {
-        miniApp.earnReward(findReward);
-      } else {
-        miniApp.closeApp();
-      }
+
       console.log(i.value, findReward, miniApp.rewardList);
 
       break;
