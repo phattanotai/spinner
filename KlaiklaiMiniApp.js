@@ -75,12 +75,12 @@ class KlaiklaiMiniApp {
 
   earnReward(reward) {
     if (!this.isDevMode) {
-      alert("ยินดีด้วย คุณได้รับรางวัล " + reward?.value + " " + reward?.name);
+      // alert("ยินดีด้วย คุณได้รับรางวัล " + reward?.value + " " + reward?.name);
       setTimeout(() => {
         this.payload = {
           code: 2,
           payload: {
-            rewardId: reward?.id,
+            reward: reward,
           },
         };
         window.ReactNativeWebView.postMessage(JSON.stringify(this.payload));
@@ -90,7 +90,7 @@ class KlaiklaiMiniApp {
 
   closeApp() {
     if (!this.isDevMode) {
-      alert("เสียใจด้วย คุณไม่ได้รับรางวัล");
+      // alert("เสียใจด้วย คุณไม่ได้รับรางวัล");
       setTimeout(() => {
         this.payload = {
           code: 3,
