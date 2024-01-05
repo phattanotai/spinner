@@ -88,14 +88,15 @@ const valueGenerator = (angleValue) => {
       const findReward = miniApp.rewardList.find(
         (reward) => reward?.id == i.value && reward.value
       );
-      finalValue.innerHTML = `<p>${
-        findReward?.name ? "" + findReward?.name : "Value"
-      }: ${i.value}</p>`;
 
       setTimeout(() => {
         if (findReward) {
+          finalValue.innerHTML = `<p>ยินดีด้วย คุณได้รับรางวัล ${
+            findReward?.value + " " + findReward?.name
+          }`;
           miniApp.earnReward(findReward);
         } else {
+          finalValue.innerHTML = "เสียใจด้วย คุณไม่ได้รับรางวัล";
           miniApp.closeApp();
         }
       }, 100);

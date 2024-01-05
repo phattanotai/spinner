@@ -74,8 +74,8 @@ class KlaiklaiMiniApp {
   }
 
   earnReward(reward) {
-    alert("ยินดีด้วย คุณได้รับรางวัล " + reward?.value + " " + reward?.name);
     if (!this.isDevMode) {
+      alert("ยินดีด้วย คุณได้รับรางวัล " + reward?.value + " " + reward?.name);
       setTimeout(() => {
         this.payload = {
           code: 2,
@@ -89,8 +89,8 @@ class KlaiklaiMiniApp {
   }
 
   closeApp() {
-    alert("เสียใจด้วย คุณไม่ได้รับรางวัล");
     if (!this.isDevMode) {
+      alert("เสียใจด้วย คุณไม่ได้รับรางวัล");
       setTimeout(() => {
         this.payload = {
           code: 3,
