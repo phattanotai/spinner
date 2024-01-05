@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Klaiklai - Map</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Prompt&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="docs/images/favicon.ico"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
+    <script src="./KlaiklaiMiniApp.js"></script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="container">
+        <canvas id="wheel"></canvas>
+        <button id="spin-btn">Spin</button>
+        <img src="spinner-arrow.svg" alt="" />
+      </div>
+      <div id="final-value">
+        <p>Click on spin button to start</p>
+      </div>
+    </div>
+
+    <!-- <div>
+      <button onclick="random()">Random</button>
+    </div> -->
+
+    <!-- Chart JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <!-- Chart JS Plugin for displaying text over chart -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.1.0/chartjs-plugin-datalabels.min.js"></script>
+    <script src="index.js"></script>
+
+    <script>
+      const miniApp = new KlaiklaiMiniApp("miniApp");
+      miniApp.initApp("C354AeqFyPMKBxv");
+
+      const random = () => {
+        const number = Math.floor(Math.random() * 10);
+        const findReward = miniApp.rewardList.find((i) => i?.id === number);
+        if (findReward) {
+          miniApp.earnReward(findReward);
+        } else {
+          miniApp.closeApp();
+        }
+        console.log(number);
+      };
+
+      const startApp = () => {
+        setMyChart();
+      };
+
+      if (miniApp.isDevMode) {
+        setMyChart();
+      }
+    </script>
+  </body>
+</html>
